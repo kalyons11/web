@@ -1,10 +1,39 @@
 var express = require('express');
 var config = require('./config');
 var fs = require("fs");
+var utils = require('./utils');
+var geoip = require('geoip-lite');
 
 var app = express();
 
+var logglyToken = config.logglyToken;
+logglyToken = utils.decrypt(logglyToken);
+var logglySubdomain = config.logglySubdomain;
+var logglyTags = config.logglyTags;
+
+var winston = require('winston');
+
+require('winston-loggly');
+ 
+winston.add(winston.transports.Loggly, {
+    token: logglyToken,
+    subdomain: logglySubdomain,
+    tags: logglyTags,
+    json: true
+});
+
 app.use(express.static('public'));
+
+app.all('/', function(req, res, next) {
+	var ip = req.connection.remoteAddress;
+	if (ip == null)
+		ip == req.headers['x-forwarded-for'];
+	if (utils.remoteIP(ip)) {
+		var geo = geoip.lookup(ip);
+		winston.log('info', 'New web request detected.', { geo: geo });
+	}
+	next();
+});
 
 app.get('/', function(req, res) {
 	var model = config.model;
@@ -14,6 +43,7 @@ app.get('/', function(req, res) {
 var pages = config.pages;
 
 app.get(pages, function(req, res) {
+	winston.log('error', "Unauthorized request.", { url: req.url });
 	var model = config.model;
 	model.error = {
 		url: req.url,
@@ -23,6 +53,7 @@ app.get(pages, function(req, res) {
 });
 
 app.use(function(req, res, next) {
+	winston.log('error', "Page not found.", { url: req.url });
 	var model = config.model;
 	model.error = {
 		url: req.url,
@@ -37,5 +68,5 @@ app.set('view engine', 'ejs');
 var port = process.env.PORT || 5000;
 var httpServer = require('http').createServer(app);
 httpServer.listen(port, function() {
-    console.log('Began client on port ' + port + '.');
+    // Listen...
 });
