@@ -33,6 +33,10 @@ build/Release
 node_modules
 jspm_packages
 
+# All in public directory
+
+public
+
 # Optional npm cache directory
 .npm
 
