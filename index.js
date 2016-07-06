@@ -2,7 +2,6 @@ var express = require('express');
 var config = require('./config');
 var fs = require("fs");
 var utils = require('./utils');
-var geoip = require('geoip-lite');
 
 var app = express();
 
@@ -30,8 +29,11 @@ app.all('/', function(req, res, next) {
 		ip == req.headers['x-forwarded-for'];
 	ip = utils.fixIP(ip);
 	if (utils.remoteIP(ip)) {
-		var geo = geoip.lookup(ip);
-		winston.log('info', 'New web request detected.', { geo: geo, ip: ip });
+		var object = utils.getLocation(ip);
+		console.log(object);
+		utils.getLocation(ip).then(function(response) {
+			winston.log('info', 'New web request detected.', { location: response, ip: ip });
+		});
 	}
 	next();
 });
