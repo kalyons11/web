@@ -24,19 +24,26 @@ winston.add(winston.transports.Loggly, {
 app.use(express.static('public'));
 
 app.all('/', function(req, res, next) {
-	winston.log('info', 'Headers object.', { headers: req.headers });
-	winston.log('info', 'Req.ip object.', { object: req.ip });
-	winston.log('info', 'Other object.', { object: req.ips });
-	var ip = req.connection.remoteAddress;
-	if (ip == null)
-		ip == req.headers['x-forwarded-for'];
-	ip = utils.fixIP(ip);
-	if (utils.remoteIP(ip)) {
-		var object = utils.getLocation(ip);
-		console.log(object);
-		utils.getLocation(ip).then(function(response) {
-			winston.log('info', 'New web request detected.', { location: response, ip: ip });
-		});
+	try {
+		var ip = req.headers['x-forwarded-for'];
+		if (ip == null)
+			ip == req.connection.remoteAddress;
+		if (ip == null)
+			ip = req.ip;
+		ip = utils.fixIP(ip);
+		if (utils.remoteIP(ip)) {
+			utils.getLocation(ip).then(function(response) {
+				if (response == null)
+					winston.log('error', 'Error loading IP information.', { ip: ip });
+				else {
+					winston.log('info', 'New web request detected.', { location: response, ip: ip });
+				}
+			});
+		} else {
+			winston.log('info', 'Running process on localhost.');
+		}
+	} catch (e) {
+		winston.log('error', 'Error loading page.' + e, { error: e });
 	}
 	next();
 });
