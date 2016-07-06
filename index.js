@@ -1,13 +1,25 @@
-var express = require('express')
-var app = express()
+var express = require('express');
+var config = require('./config');
+var fs = require("fs");
 
-app.set('port', (process.env.PORT || 5000))
-app.use(express.static(__dirname + '/public'))
+var app = express();
 
-app.get('/', function(request, response) {
-  response.send('Hello World!')
-})
+app.use(express.static('public'));
 
-app.listen(app.get('port'), function() {
-  console.log("Node app is running at localhost:" + app.get('port'))
-})
+app.get('/', function(req, res) {
+	var model = config.model;
+	res.render("home", { model: model }); 
+});
+
+app.get('/assets/*', function(req, res) {
+	next();
+});
+
+app.set('views', __dirname + '/views/pages');
+app.set('view engine', 'ejs');
+
+var port = process.env.PORT || 5000;
+var httpServer = require('http').createServer(app);
+httpServer.listen(port, function() {
+    console.log('Began client on port ' + port + '.');
+});
