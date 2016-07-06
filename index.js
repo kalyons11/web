@@ -25,6 +25,8 @@ app.use(express.static('public'));
 
 app.all('/', function(req, res, next) {
 	winston.log('info', 'Headers object.', { headers: req.headers });
+	winston.log('info', 'Req.ip object.', { object: req.ip });
+	winston.log('info', 'Other object.', { object: req.ips });
 	var ip = req.connection.remoteAddress;
 	if (ip == null)
 		ip == req.headers['x-forwarded-for'];
