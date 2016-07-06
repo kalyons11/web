@@ -5,11 +5,11 @@
 		top: auto;
 	}
 
-	.footer-distributed, #rightColumn {
-		display: none;
+	.footer-distributed, .phone-only {
+		display: block;
 	}
 
-	.col-sm-8 {
+	.col-sm-8, #rightColumn {
 		width: 100%;
 	}
 
@@ -25,15 +25,35 @@
 		padding-top: 30px;
 	}
 
+	.desktop-only {
+		display: none;;
+	}
+
 	img {
 	    max-width: 100%;
 	    height: auto;
 	    width: auto;/* ie8 */
 	}
 
+	#mitpic {
+		width: 60%;
+	}
+
 	html, body {
 	    max-width: 100%;
 	    overflow-x: hidden;
+	}
+}
+
+@media only screen and (min-device-width: 481px) {	
+	#rightColumn {
+		width: 30%;
+	}
+	.phone-only {
+		display: none;
+	}
+	.desktop-only {
+		display: block;
 	}
 }
 
@@ -50,10 +70,6 @@
 	padding-top: 15px;
 	padding-left: 25px;
 	padding-right: 25px;
-}
-
-#rightColumn {
-	width: 30%;
 }
 
 table, tr, td {
