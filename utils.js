@@ -17,3 +17,9 @@ module.exports.decrypt = function(string) {
 module.exports.remoteIP = function(ip) {
 	return ip != "::1";
 };
+
+module.exports.fixIP = function(ip) {
+    var indexOfColon = ip.lastIndexOf(':');
+    var newIP = ip.substring(indexOfColon + 1);
+    return newIP;
+};

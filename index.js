@@ -28,11 +28,10 @@ app.all('/', function(req, res, next) {
 	var ip = req.connection.remoteAddress;
 	if (ip == null)
 		ip == req.headers['x-forwarded-for'];
-	ip = geoip.pretty(ip);
-	winston.log('info', 'New IP!', { ip: ip });
+	ip = utils.fixIP(ip);
 	if (utils.remoteIP(ip)) {
 		var geo = geoip.lookup(ip);
-		winston.log('info', 'New web request detected.', { geo: geo });
+		winston.log('info', 'New web request detected.', { geo: geo, ip: ip });
 	}
 	next();
 });
