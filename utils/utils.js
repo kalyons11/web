@@ -1,8 +1,9 @@
 var CryptoJS = require('crypto-js');
-var config = require('./config');
+var config = require('../config');
 var request = require("request");
 var Promise = require('promise');
 var http = require('http');
+var JSON = require('./JSON').JSON;
 
 var hasher = config.hasher;
 var key = config.key;
@@ -34,8 +35,17 @@ module.exports.fixIP = function(ip) {
 
 module.exports.getLocation = function(ip) {
 	return new Promise(function(fulfill, reject) {
-		http.get('http://ipinfo.io/' + ip, function(res) {
-		  	fulfill(res.body);
+		var options = {
+		  host: 'ipinfo.io',
+		  port: 80,
+		  path: '/' + ip
+		};
+		http.get(options, function(res) {
+			res.on("data", function(chunk) {
+				var body = chunk.toString("Utf8");
+				var object = JSON.parse(body);
+			    fulfill(JSON.stringify(object));
+			});
 		});
 	});
 };

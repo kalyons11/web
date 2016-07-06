@@ -6,7 +6,7 @@ config.model = {
 	}
 };
 
-config.pages = ['/index.js', '/config.js', '/package.json', '/.gitignore', '/app.json', '/LICENSE', '/Procfile', '/README.md', '/utils.js'];
+config.pages = ['/index.js', '/config.js', '/package.json', '/.gitignore', '/app.json', '/LICENSE', '/Procfile', '/README.md'];
 config.logglyToken = "U2FsdGVkX19FwaBr06EuWJkLPN1j4Sq9tR2ww7t8sb/k1iR2ks/dswzOi8lUks6zKH/mldnexRPnEO0IOkGqCA==";
 config.logglySubdomain = "kalyons";
 config.logglyTags = [ "web" ];

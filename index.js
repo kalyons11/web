@@ -1,7 +1,7 @@
 var express = require('express');
 var config = require('./config');
 var fs = require("fs");
-var utils = require('./utils');
+var utils = require('./utils/utils');
 
 var app = express();
 
