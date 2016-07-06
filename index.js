@@ -11,8 +11,24 @@ app.get('/', function(req, res) {
 	res.render("home", { model: model }); 
 });
 
-app.get('/assets/*', function(req, res) {
-	next();
+var pages = config.pages;
+
+app.get(pages, function(req, res) {
+	var model = config.model;
+	model.error = {
+		url: req.url,
+		code: 401
+	};
+	res.status(401).render("error", { model: model });
+});
+
+app.use(function(req, res, next) {
+	var model = config.model;
+	model.error = {
+		url: req.url,
+		code: 404
+	};
+	res.status(404).render("error", { model: model });
 });
 
 app.set('views', __dirname + '/views/pages');

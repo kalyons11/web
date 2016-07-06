@@ -38,11 +38,11 @@
 	#mitpic {
 		width: 60%;
 	}
+}
 
-	html, body {
-	    max-width: 100%;
-	    overflow-x: hidden;
-	}
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 @media only screen and (min-device-width: 481px) {	

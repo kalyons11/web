@@ -6,4 +6,6 @@ config.model = {
 	}
 };
 
+config.pages = ['/index.js', '/config.js', '/package.json', '/.gitignore', '/app.json', '/LICENSE', '/Procfile', '/README.md'];
+
 module.exports = config;
