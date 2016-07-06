@@ -24,12 +24,12 @@
 	#topParagraph {
 		padding-top: 30px;
 	}
-}
 
-img {
-    max-width: 100%;
-    height: auto;
-    width: auto;/* ie8 */
+	img {
+	    max-width: 100%;
+	    height: auto;
+	    width: auto;/* ie8 */
+	}
 }
 
 #stickyNav {
