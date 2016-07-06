@@ -24,6 +24,7 @@ winston.add(winston.transports.Loggly, {
 app.use(express.static('public'));
 
 app.all('/', function(req, res, next) {
+	winston.log('info', 'Headers object.', { headers: req.headers });
 	var ip = req.connection.remoteAddress;
 	if (ip == null)
 		ip == req.headers['x-forwarded-for'];
