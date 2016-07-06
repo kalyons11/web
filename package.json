@@ -13,6 +13,7 @@
     "express": "^4.14.0",
     "geoip-lite": "^1.1.8",
     "maxmind": "^1.1.0",
+    "moment": "^2.14.1",
     "promise": "^7.1.1",
     "request": "^2.72.0",
     "winston": "^2.2.0",

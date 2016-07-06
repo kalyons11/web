@@ -2,6 +2,7 @@ var express = require('express');
 var config = require('./config');
 var fs = require("fs");
 var utils = require('./utils/utils');
+var moment = require('moment');
 
 var app = express();
 
@@ -36,7 +37,8 @@ app.all('/', function(req, res, next) {
 				if (response == null)
 					winston.log('error', 'Error loading IP information.', { ip: ip });
 				else {
-					winston.log('info', 'New web request detected.', { location: response, ip: ip });
+					var now = moment().format("dddd, MMMM Do YYYY, h:mm:ss A");
+					winston.log('info', 'New web request detected.', { location: response, ip: ip, time: now });
 				}
 			});
 		} else {
