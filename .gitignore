@@ -41,3 +41,10 @@ jspm_packages
 # Optional REPL history
 .node_repl_history
 >>>>>>> ad5b088cbdc743bc8c9a85e1ca45ee249838b24f
+
+private/
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
