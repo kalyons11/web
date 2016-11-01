@@ -29,11 +29,10 @@
 		display: none;;
 	}
 
-	img {
-	    max-width: 100%;
-	    height: auto;
-	    width: auto;/* ie8 */
-	}
+    .full-image {
+        max-width: 100%;
+        width: auto;
+    }
 
 	#mitpic {
 		width: 60%;
