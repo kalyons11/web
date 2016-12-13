@@ -46,7 +46,7 @@ app.all(config.do, function(req, res, next) {
         });
         response.on('end', function() {
             //here we have the full response, html or json object
-            console.log(postData);
+            //console.log(postData);
             next();
         })
         response.on('error', function(e) {

@@ -29,6 +29,8 @@
 <script>
     $( document ).ready(function() {
         ll('tagEvent', 'Main page visited.');
-        console.log("Here!!!");
+        $("#resume_click").click(function() {
+            ll('tagEvent', 'Resume page visited.');
+        })
     });
 </script>
