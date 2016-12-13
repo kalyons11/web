@@ -15,3 +15,19 @@
 		window.scrollTo(window.scrollX, window.scrollY - 100);
 	});
 </script>
+<script>
+    +function(l,y,t,i,c,s) {
+        l['LocalyticsGlobal'] = i;
+        l[i] = function() { (l[i].q = l[i].q || []).push(arguments) };
+        l[i].t = +new Date;
+        (s = y.createElement(t)).type = 'text/javascript';
+        s.src = '//web.localytics.com/v3/localytics.js';
+        (c = y.getElementsByTagName(t)[0]).parentNode.insertBefore(s, c);
+        ll('init', 'c80fa9b2eb0d05c867b0727-ade47ea4-c0f5-11e6-c875-008d99911bee', {} /* Options */);
+    }(window, document, 'script', 'll');
+</script>
+<script>
+    $( document ).ready(function() {
+        ll('tagEvent', 'Main page visited.');
+    });
+</script>
