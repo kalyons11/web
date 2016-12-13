@@ -4,22 +4,30 @@ var request = require("request");
 var Promise = require('promise');
 var http = require('http');
 var JSON = require('./JSON').JSON;
+var crypto = require('cryptlib');
 
-var hasher = config.hasher;
-var key = config.key;
+var iv = "_sbSmKUxVQAQ-hvQ"; // 16 bytes = 128 bit
+var key = "1bf6bf65e45b55825b1919cbadd028e6";
 
 module.exports.encrypt = function(string) {
-	var result = CryptoJS.AES.encrypt(string, hasher);
-	return result.toString();
+    var cypherText = crypto.encrypt(string, key, iv);
+    return cypherText;
+};
+
+module.exports.encryptObject = function (object) {
+    var cypherText = crypto.encrypt(JSON.stringify(object), key, iv);
+    return cypherText;
 };
 
 module.exports.decrypt = function(string) {
-	var bytes  = CryptoJS.AES.decrypt(string, hasher);
-	var result = bytes.toString(CryptoJS.enc.Utf8);
-	return result;
+    var dec = crypto.decrypt(string, key, iv);
+    return dec;
 };
 
-key = exports.decrypt(key);
+module.exports.decryptObject = function (string) {
+    var dec = crypto.decrypt(string, key, iv);
+    return JSON.parse(dec);
+};
 
 module.exports.remoteIP = function(ip) {
 	return ip != "1";

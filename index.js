@@ -3,52 +3,59 @@ var config = require('./config');
 var fs = require("fs");
 var utils = require('./utils/utils');
 var moment = require('moment');
+var https = require("https");
+const uuidV4 = require('uuid/v4');
+var JSON = require('./utils/JSON').JSON;
 
 var app = express();
-
-var logglyToken = config.logglyToken;
-logglyToken = utils.decrypt(logglyToken);
-var logglySubdomain = config.logglySubdomain;
-var logglyTags = config.logglyTags;
 
 var winston = require('winston');
 
 require('winston-loggly');
- 
-winston.add(winston.transports.Loggly, {
-    token: logglyToken,
-    subdomain: logglySubdomain,
-    tags: logglyTags,
-    json: true
+
+app.all(config.do, function(req, res, next) {
+    var postDataRaw = {
+        'schema_url': 'https://localytics-files.s3.amazonaws.com/schemas/eventsApi/v0.json',
+        'app_uuid': utils.decrypt(config.appId),
+        'customer_id': 'Random User',
+        'event_name': 'Page_Visit',
+        'event_time': (new Date()).getTime(),
+        'uuid': uuidV4(),
+        'attributes' : {
+            'url': req.url
+        }
+    };
+    var postData = JSON.stringify(postDataRaw);
+    var auth = utils.decrypt(config.apiKey) + ':' + utils.decrypt(config.secret);
+    var options = {
+        host: config.host,
+        port: config.port,
+        path: config.path,
+        method: 'POST',
+        headers: {
+            'Accept': '*/*',
+            'Authorization': 'Basic ' + new Buffer(auth).toString('base64'),
+            'Content-Type': 'application/json',
+            'Content-Length': postData.length
+        }
+    };
+    https.request(options, function(response) {
+        var body = "";
+        response.on('data', function(data) {
+            body += data.toString('utf-8');
+        });
+        response.on('end', function() {
+            //here we have the full response, html or json object
+            console.log(postData);
+            next();
+        })
+        response.on('error', function(e) {
+            console.log("Got error: " + e.message);
+        });
+    }).write(postData);
 });
 
 app.use(express.static('public'));
-
-app.all('/', function(req, res, next) {
-	try {
-		var ip = req.headers['x-forwarded-for'];
-		if (ip == null)
-			ip == req.connection.remoteAddress;
-		if (ip == null)
-			ip = req.ip;
-		ip = utils.fixIP(ip);
-		if (utils.remoteIP(ip)) {
-			utils.getLocation(ip).then(function(response) {
-				if (response == null)
-					winston.log('error', 'Error loading IP information.', { ip: ip });
-				else {
-					var now = moment().format("dddd, MMMM Do YYYY, h:mm:ss A");
-					winston.log('info', 'New web request detected.', { location: response, ip: ip, time: now });
-				}
-			});
-		} else {
-			winston.log('info', 'Running process on localhost.');
-		}
-	} catch (e) {
-		winston.log('error', 'Error loading page.' + e, { error: e });
-	}
-	next();
-});
 
 app.get('/', function(req, res) {
 	var model = config.model;
