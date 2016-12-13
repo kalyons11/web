@@ -49,4 +49,4 @@ private/
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
 
-config.js
+*.idea
