@@ -4,33 +4,4 @@
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'>
 <link rel="shortcut icon" HREF="/favicon.ico" type="image/ico">
 <link rel="icon" href="/favicon.png" type="image/png">
-<link rel="stylesheet" href="/css/site.css">
 <link rel="stylesheet" href="/css/footer-distributed.css">
-<link rel="stylesheet" href="/css/bootstrap.min.css">
-<script src="/js/jquery.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/site.js"></script>
-<script type="text/javascript">
-	$(window).on("hashchange", function () {
-		window.scrollTo(window.scrollX, window.scrollY - 100);
-	});
-</script>
-<script>
-    +function(l,y,t,i,c,s) {
-        l['LocalyticsGlobal'] = i;
-        l[i] = function() { (l[i].q = l[i].q || []).push(arguments) };
-        l[i].t = +new Date;
-        (s = y.createElement(t)).type = 'text/javascript';
-        s.src = '//web.localytics.com/v3/localytics.js';
-        (c = y.getElementsByTagName(t)[0]).parentNode.insertBefore(s, c);
-        ll('init', 'c80fa9b2eb0d05c867b0727-ade47ea4-c0f5-11e6-c875-008d99911bee', {} /* Options */);
-    }(window, document, 'script', 'll');
-</script>
-<script>
-    $( document ).ready(function() {
-        ll('tagEvent', 'Main page visited.');
-        $("#resume_click").click(function() {
-            ll('tagEvent', 'Resume page visited.');
-        })
-    });
-</script>

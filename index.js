@@ -59,7 +59,7 @@ app.use(express.static('public'));
 
 app.get('/', function(req, res) {
 	var model = config.model;
-	res.render("home", { model: model }); 
+	res.render("index", { model: model });
 });
 
 var pages = config.pages;
