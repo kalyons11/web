@@ -1,0 +1,16 @@
+@media only screen and (max-device-width: 767px) {
+    .img-responsive-side, .spacer {
+        display: none;
+    }
+    .top-img {
+        padding-bottom: 30px;
+    }
+    .h2-special {
+        font-size: 24px;
+    }
+}
+.img-responsive {
+    max-width: 200px;
+    padding: 20px;
+    margin: auto;
+}
