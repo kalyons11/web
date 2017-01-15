@@ -8,10 +8,6 @@ var JSON = require('./utils/JSON').JSON;
 
 var app = express();
 
-var winston = require('winston');
-
-require('winston-loggly');
-
 app.use(express.static('public'));
 
 app.get('/', function(req, res) {
@@ -22,7 +18,6 @@ app.get('/', function(req, res) {
 var pages = config.pages;
 
 app.get(pages, function(req, res) {
-	winston.log('error', "Unauthorized request.", { url: req.url });
 	var model = config.model;
 	model.error = {
 		url: req.url,
@@ -32,7 +27,6 @@ app.get(pages, function(req, res) {
 });
 
 app.use(function(req, res, next) {
-	winston.log('error', "Page not found.", { url: req.url });
 	var model = config.model;
 	model.error = {
 		url: req.url,
