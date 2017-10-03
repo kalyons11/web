@@ -1,10 +1,25 @@
 <footer class="text-center">
     <div class="footer-below">
         <div class="container">
-            <div class="row"><% var now = new Date(); var year = now.getFullYear(); %>
+            <div class="row" style="marg"><% var now = new Date(); var year = now.getFullYear(); %>
                 <p>Copyright &copy; Kevin Lyons <%= year %>.</p>
-                <p>Powered by <a href="https://startbootstrap.com/template-overviews/freelancer/" target="_blank">Bootstrap</a>.</p>
                 <p>Updated <%= model.configurations.updated %>.</p></div>
+                <div style="display: inline-block; margin: 0 auto;">
+                    <a href="https://startbootstrap.com/template-overviews/freelancer/" target="_blank">
+                        <img src="/bootstrap-solid.svg" alt="Heroku" style="padding:10px; border-radius: 20px; height: 80px;">
+                    </a>
+                </div>
+                <div style="display: inline-block; margin: 0 auto;">
+                    <a href="https://www.heroku.com" target="_blank">
+                        <img src="/heroku-logo-stroke-purple.png" alt="Heroku" style="padding:10px; border-radius: 20px; height: 80px;">
+                    </a>
+                </div>
+                <div style="display: inline-block; margin: 0 auto;">
+                    <a href="https://nodejs.org/en/" target="_blank">
+                        <img src="/nodejs-new-pantone-black.png" alt="Heroku" style="padding:10px; border-radius: 20px; height: 80px;">
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 
