@@ -43,3 +43,8 @@ var httpServer = require('http').createServer(app);
 httpServer.listen(port, function() {
     // Listen...
 });
+
+var http = require("http");
+setInterval(function() {
+    http.get("http://kevinalyons.com.com");
+}, 300000); // every 5 minutes (300000)
