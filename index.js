@@ -15,6 +15,11 @@ app.get('/', function(req, res) {
 	res.render("index", { model: model });
 });
 
+app.get('/courses', function(req, res) {
+	var model = config.model;
+	res.render("courses", { model: model });
+});
+
 var pages = config.pages;
 
 app.get(pages, function(req, res) {
