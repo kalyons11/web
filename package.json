@@ -10,7 +10,8 @@
   "dependencies": {
     "cryptlib": "^1.0.3",
     "express": "^4.16.2",
-    "mocha": "^4.0.1"
+    "mocha": "^4.0.1",
+    "request": "^2.83.0"
   },
   "repository": {
     "type": "git",
