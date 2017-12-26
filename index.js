@@ -1,10 +1,7 @@
 var express = require('express');
 var config = require('./config');
 var fs = require("fs");
-var utils = require('./utils/utils');
-var moment = require('moment');
-var https = require("https");
-var JSON = require('./utils/JSON').JSON;
+var http = require("http");
 
 var app = express();
 
@@ -44,7 +41,7 @@ app.set('views', __dirname + '/views/pages');
 app.set('view engine', 'ejs');
 
 var port = process.env.PORT || 5000;
-var httpServer = require('http').createServer(app);
+var httpServer = http.createServer(app);
 httpServer.listen(port, function() {
     console.log("Listening at port " + port + ".");
 });

@@ -1,7 +1,3 @@
-var CryptoJS = require('crypto-js');
-var config = require('../config');
-var Promise = require('promise');
-var http = require('http');
 var JSON = require('./JSON').JSON;
 var crypto = require('cryptlib');
 
