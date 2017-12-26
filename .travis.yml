@@ -3,3 +3,11 @@ node_js:
  - "node"
 before_install:
   - npm install -g npm@latest
+
+notifications:
+  email:
+    recipients:
+      - kalyons@mit.edu
+    on_success: always
+    on_failure: never
+
