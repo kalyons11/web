@@ -2,8 +2,8 @@ var config = {};
 
 config.model = {
 	configurations: {
-		updated: "August 30, 2021"
-	}
+		updated: "May 3, 2022",
+	},
 };
 
 config.pages = ['/index.js', '/config.js', '/package.json', '/.gitignore', '/app.json', '/LICENSE', '/Procfile', '/README.md'];
