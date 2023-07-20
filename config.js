@@ -2,7 +2,7 @@ var config = {};
 
 config.model = {
 	configurations: {
-		updated: "March 8, 2023",
+		updated: "July 19, 2023",
 	},
 };
 
